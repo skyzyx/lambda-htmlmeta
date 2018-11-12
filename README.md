@@ -25,6 +25,13 @@ Additionally, it accepts one query-string parameter.
 | --------- | ----------- |
 | `url` | (Required) The URL to parse the metadata from. |
 
+### Examples
+
+* [Microdata](https://metadata.ryanparman.com/microdata/?url=https://ryanparman.com/posts/2018/serving-bandwidth-friendly-video-with-hls/)
+* [Microformats 2](https://metadata.ryanparman.com/microformats2/?url=https://ryanparman.com/posts/2018/serving-bandwidth-friendly-video-with-hls/)
+* [oEmbed](https://metadata.ryanparman.com/oembed/?url=https://ryanparman.com/posts/2018/serving-bandwidth-friendly-video-with-hls/)
+* [OpenGraph](https://metadata.ryanparman.com/opengraph/?url=https://ryanparman.com/posts/2018/serving-bandwidth-friendly-video-with-hls/)
+
 ## Developing/Deploying
 
 ### Golang
