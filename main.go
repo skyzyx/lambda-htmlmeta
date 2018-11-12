@@ -17,12 +17,11 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/dyatlov/go-htmlinfo/htmlinfo"
-	// "github.com/namsral/microdata"
+	"github.com/namsral/microdata"
 	"willnorris.com/go/microformats"
 )
 
 var (
-	args            []string
 	body            []byte
 	data            interface{}
 	emptyAGW        *events.APIGatewayProxyResponse
@@ -32,6 +31,7 @@ var (
 	isOEmbed        bool
 	isMicrodata     bool
 	isMicroformats2 bool
+	resp            *http.Response
 	statusCode      int
 	u               string
 )
@@ -53,12 +53,17 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 		return *emptyAGW, errors.New("This is not a valid URL.")
 	}
 
-	resp, err := http.Get(u)
+	resp, err = http.Get(u)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
-	defer resp.Body.Close()
+	defer func() {
+		err = resp.Body.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}()
 
 	if isOpenGraph, err = strconv.ParseBool(os.Getenv("META_OPENGRAPH")); err != nil {
 		isOpenGraph = false
@@ -76,7 +81,7 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 		isMicroformats2 = false
 	}
 
-	if isOpenGraph || isOEmbed || isMicrodata {
+	if isOpenGraph || isOEmbed {
 		info := htmlinfo.NewHTMLInfo()
 
 		err = info.Parse(resp.Body, &u, nil)
@@ -96,15 +101,31 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 		if err != nil {
 			log.Fatal(err)
 		}
-	} else if isMicroformats2 {
-		URL, err := url.Parse(u)
+	} else if isMicrodata {
+		var info *microdata.Microdata
+
+		info, err = microdata.ParseURL(u)
 		if err != nil {
-			panic(err)
+			log.Fatal(err)
+		}
+
+		body, err = json.MarshalIndent(info, "", "    ")
+		if err != nil {
+			log.Fatal(err)
+		}
+	} else if isMicroformats2 {
+		var URL *url.URL
+		URL, err = url.Parse(u)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 		info := microformats.Parse(resp.Body, URL)
 
 		body, err = json.MarshalIndent(info, "", "    ")
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	// HTTP response as JSON
@@ -134,7 +155,7 @@ func main() {
 
 		// de-serialize into Go object
 		var inputEvent events.APIGatewayProxyRequest
-		if err := json.Unmarshal(inputJSON, &inputEvent); err != nil {
+		if err = json.Unmarshal(inputJSON, &inputEvent); err != nil {
 			fmt.Println(err.Error())
 			os.Exit(1)
 		}

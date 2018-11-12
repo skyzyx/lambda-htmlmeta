@@ -29,6 +29,7 @@ custom:
       bucket: ${self:custom.bucket}.s3.amazonaws.com
       prefix: ${self:provider.stage}
     cookies: none
+    compress: true
     querystring:
       - url
 
