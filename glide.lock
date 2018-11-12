@@ -1,0 +1,71 @@
+hash: c3e0a0c2de342cef64084208f9db5df05fa259688a9fa435b6404246d7acef88
+updated: 2018-11-11T21:31:04.639195-08:00
+imports:
+- name: github.com/andybalholm/cascadia
+  version: 680b6a57bda4f657485ad44bdea42342ead737bc
+- name: github.com/asaskevich/govalidator
+  version: ccb8e960c48f04d6935e72476ae4a51028f9e22f
+- name: github.com/aws/aws-lambda-go
+  version: 2d482ef09017ae953b1e8d5a6ddac5b696663a3c
+  subpackages:
+  - events
+  - lambda
+  - lambda/messages
+  - lambdacontext
+- name: github.com/davecgh/go-spew
+  version: 8991bc29aa16c548c550c7ff78260e27b9ab7c73
+  subpackages:
+  - spew
+- name: github.com/dyatlov/go-htmlinfo
+  version: d9417c75de65fbae5b16f4038b421c9e1cc61f0d
+  subpackages:
+  - htmlinfo
+- name: github.com/dyatlov/go-oembed
+  version: 4bc5ab7a42e91e45e957f9b0c47f911efed16710
+  subpackages:
+  - oembed
+- name: github.com/dyatlov/go-opengraph
+  version: 816b6608b3c8c1e871bc9cf777f390e2532081fe
+  subpackages:
+  - opengraph
+- name: github.com/dyatlov/go-readability
+  version: e7b2080f87f824caa519ed33dac6d4e4e413616d
+- name: github.com/Jeffail/gabs
+  version: 7be49c3f43696c7ca8c9a76d6836703d83aea404
+- name: github.com/namsral/microdata
+  version: dcb350fbc44bd96a85bb809dca2dc9afe33e252e
+  subpackages:
+  - cmd/microdata
+- name: github.com/PuerkitoBio/goquery
+  version: 2af3d16e2bb8c46efba31b0af1d7ca2eac7fcc23
+- name: golang.org/x/net
+  version: 03003ca0c849e57b6ea29a4bab8d3cb6e4d568fe
+  subpackages:
+  - html
+  - html/atom
+  - html/charset
+- name: golang.org/x/text
+  version: 6f44c5a2ea40ee3593d98cdcc905cc1fdaa660e2
+  subpackages:
+  - encoding
+  - encoding/charmap
+  - encoding/htmlindex
+  - encoding/internal
+  - encoding/internal/identifier
+  - encoding/japanese
+  - encoding/korean
+  - encoding/simplifiedchinese
+  - encoding/traditionalchinese
+  - encoding/unicode
+  - internal/language
+  - internal/language/compact
+  - internal/tag
+  - internal/utf8internal
+  - language
+  - runes
+  - transform
+- name: gopkg.in/alecthomas/gometalinter.v2
+  version: 17a7ffa42374937bfecabfb8d2efbd4db0c26741
+- name: willnorris.com/go/microformats
+  version: 619e5341e0bb6adb2d41f5b7f49b5a15fdaa953e
+testImports: []

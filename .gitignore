@@ -1,0 +1,4 @@
+.serverless
+bin
+serverless.yml
+vendor

@@ -1,0 +1,21 @@
+{
+  "name": "lambda-htmlmeta",
+  "version": "1.0.0",
+  "description": "HTML Metadata (e.g., OpenGraph, OEmbed, Microdata, Microformats2) with AWS Lambda, Golang, and API Gateway.",
+  "dependencies": {},
+  "devDependencies": {
+    "serverless-api-cloudfront": "^0.9.4",
+    "serverless-apigw-binary": "^0.4.4",
+    "serverless-apigwy-binary": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skyzyx/lambda-htmlmeta.git"
+  },
+  "author": "Ryan Parman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skyzyx/lambda-htmlmeta/issues"
+  },
+  "homepage": "https://github.com/skyzyx/lambda-htmlmeta#readme"
+}

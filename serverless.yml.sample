@@ -1,0 +1,93 @@
+# serverless.yml
+
+# https://docs.serverless.com
+# https://medium.com/nextfaze/binary-responses-with-serverless-framework-and-api-gateway-5fde91376b76
+# https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
+
+service: "lambda-htmlmeta"
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+# frameworkVersion: "=X.X.X"
+frameworkVersion: ">=1.28.0 <2.0.0"
+
+# you can overwrite defaults here
+stage: dev
+region: us-east-1
+
+plugins:
+  - serverless-api-cloudfront
+
+custom:
+  domain: {you.example.com}
+  bucket: {you-example-com}
+  certificate: {arn for your ACM TLS certificate}
+  apiCloudFront:
+    domain: ${self:custom.domain}
+    certificate: ${self:custom.certificate}
+    logging:
+      bucket: ${self:custom.bucket}.s3.amazonaws.com
+      prefix: ${self:provider.stage}
+    cookies: none
+    querystring:
+      - url
+
+provider:
+  name: aws
+  runtime: go1.x
+  stage: ${opt:stage, 'dev'}
+  memorySize: 128
+  timeout: 10
+  # tags:
+
+package:
+ exclude:
+   - ./**
+ include:
+   - ./bin/**
+
+functions:
+  opengraph:
+    handler: bin/htmlinfo
+    environment:
+      "META_OPENGRAPH": "true"
+    events:
+      - http:
+          path: opengraph
+          method: get
+  oembed:
+    handler: bin/htmlinfo
+    environment:
+      "META_OEMBED": "true"
+    events:
+      - http:
+          path: oembed
+          method: get
+  microdata:
+    handler: bin/htmlinfo
+    environment:
+      "META_MICRODATA": "true"
+    events:
+      - http:
+          path: microdata
+          method: get
+  microformats2:
+    handler: bin/htmlinfo
+    environment:
+      "META_MICROFORMATS2": "true"
+    events:
+      - http:
+          path: microformats2
+          method: get
+
+# you can add CloudFormation resource templates here
+resources:
+  Resources:
+    NewResource:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.bucket}
+  Outputs:
+     ApiDistribution:
+       Description: "ApiDistribution"
+       Value: ApiDistribution
