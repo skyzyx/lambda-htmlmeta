@@ -14,10 +14,10 @@ The `https://metadata.ryanparman.com` hostname is a CloudFront caching distribut
 
 There are four endpoints:
 
-* `GET /oembed` — This will return an oEmbed response, formatted as JSON.
-* `GET /opengraph` — This will return all OpenGraph-formatted metadata as JSON.
-* `GET /microdata` — This will return all Microdata-formatted metadata (e.g., schema.org) as JSON.
-* `GET /microformats2` — This will return all Microformats 2-formatted metadata as JSON.
+* `GET /microdata` — This will return all [Microdata](https://schema.org/docs/gs.html)-formatted metadata (e.g., schema.org) as JSON.
+* `GET /microformats2` — This will return all [Microformats 2](http://microformats.org/wiki/microformats-2)-formatted metadata as JSON.
+* `GET /oembed` — This will return an [oEmbed](https://oembed.com) response, formatted as JSON.
+* `GET /opengraph` — This will return all [OpenGraph](http://ogp.me)-formatted metadata as JSON.
 
 Additionally, it accepts one query-string parameter.
 
